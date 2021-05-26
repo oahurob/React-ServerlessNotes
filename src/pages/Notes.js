@@ -1,7 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+//components
+import NewNoteButton from '../components/NewNoteButton';
+//style
 import styled from 'styled-components';
+//easybase
+import {useEasybase} from 'easybase-react';
 
 const Notes = () => {
+
+    const {Frame, sync, configureFrame} = useEasybase();
+
+    useEffect(() => {
+        configureFrame({table: 'REACT-NOTES', limit: 10});
+        sync();
+    }, []);
+
     const backendData = [
         {id: 1, title: 'Practice programming', description: 'Think of something to do', createDate: '05-26-21'},
         {id: 2, title: 'Start React Project', description: 'Init project', createDate: '05-26-21'},
@@ -9,15 +22,18 @@ const Notes = () => {
     ];
 
     return(
-        <StyledDiv>
-            {backendData.map(ele => 
-            <StyledNote key={ele.id}>
-                <h3>{ele.title}</h3>
-                <p>{ele.description}</p>
-                <small>{ele.createDate}</small>
-            </StyledNote>
-            )}
-        </StyledDiv>
+        <div>
+            <NewNoteButton/>
+            <StyledDiv>
+                {Frame().map(ele => 
+                    <StyledNote key={ele.id}>
+                        <h3>{ele.title}</h3>
+                        <p>{ele.description}</p>
+                        <p>{ele.posted}</p>
+                    </StyledNote>
+                )}
+            </StyledDiv>
+        </div>
     );
 };
 
@@ -36,4 +52,7 @@ const StyledNote = styled.div`
     border: 4px solid rgb(66, 74, 153);
     border-radius: 20px;
     background-color: rgba(112, 233, 203, 0.5);
+    p{
+        padding-top: 4px;
+    }
 `;
