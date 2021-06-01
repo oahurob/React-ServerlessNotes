@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import Notes from './pages/Notes';
+import Container from './pages/Container';
 import GlobalStyles from './components/GlobalStyle';
 //Easybase
 import {EasybaseProvider, useEasybase} from 'easybase-react';
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <GlobalStyles/>
       <EasybaseProvider ebconfig={ebconfig}>
-        <Notes/>
+        <Container/>
       </EasybaseProvider>
     </div>
   );

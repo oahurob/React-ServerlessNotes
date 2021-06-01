@@ -10,21 +10,41 @@ const NewNoteButton = () => {
         const newDescription = prompt('Please enter a new description: ');
 
         Frame().push({
+            id: Frame().length + 1,
             title: newTitle,
             description: newDescription,
-            posted: new Date().toString(),
+            posted: new Date().toString().slice(0,10),
         })
 
         sync();
     };
 
     return(
-        <div>
-            <button onClick={AddNewNote}>
+        <StyledDiv>
+            <StyledButton onClick={AddNewNote}>
                 Add Note
-            </button>
-        </div>
+            </StyledButton>
+        </StyledDiv>
     );
 };
 
 export default NewNoteButton;
+
+const StyledButton = styled.button`
+    margin: auto;
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+`;
+
+const StyledDiv = styled.div`
+    margin: auto;
+    padding-bottom: 1rem;
+    width: fit-content;
+`;

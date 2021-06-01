@@ -10,7 +10,7 @@ const GlobadStyles = createGlobalStyle`
 
     body{
         width: 100%;
-        background: linear-gradient(90deg, lightblue, blue);
+        background: #67AAF9;
     }
 
 `;
